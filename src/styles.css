@@ -1,1 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.home-shape{
+    clip-path: polygon(50% 0%, 100% 20%, 90% 20%, 90% 100%, 10% 100%, 10% 20%, 0 20%);
+
+}
