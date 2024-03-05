@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 })
 export class TokenService {
 
-  tokensecret:string='mayakey2024'
+  tokensecret:string='TCRG2024'
   constructor(private router : Router) {
     
   }

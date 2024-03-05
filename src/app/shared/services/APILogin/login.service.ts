@@ -11,6 +11,6 @@ export class LoginService {
   constructor(private http:HttpClient,public url:ApiService) { }
 
   async adminloign(data:any){
-    return await lastValueFrom(this.http.post(`${this.url.api()}/api/login`,data));
+    return await lastValueFrom(this.http.post(`${this.url.api()}/api/adminlogin`,data));
   }
 }

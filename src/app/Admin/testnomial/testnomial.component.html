@@ -1,0 +1,55 @@
+<section>
+    <div class="m-w-[85rem] w-full mx-auto px-3">
+        <div class="flex justify-between items-center mb-2">
+            <div class="flex items-center justify-content-start">
+                <!-- <span class="mx-1 text-color">Items per page: </span>
+                <p-dropdown [options]="options" optionLabel="label" optionValue="value" [(ngModel)]="rows" (ngModelChange)="page = 0"></p-dropdown> -->
+                <p-paginator [first]="page" [rows]="8" [totalRecords]="testnomialData['totalRecords']" (onPageChange)="onPageChange($event)" [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Total: {totalRecords}" [showPageLinks]="true" [showFirstLastIcon]="false" ></p-paginator>
+            </div>
+            <button (click)="add()" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-primary-color rounded-lg"><i class="fa-solid fa-circle-plus"></i></button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            @for (item of testnomialData['datas']; track item.id;let ind = $index) {
+           
+                <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+
+                    <!-- <h5 role="button" class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5> -->
+                    <p class="mb-3 h-[260px] font-normal text-justify text-gray-700 dark:text-gray-400 overflow-y-auto">{{item.reviewer_description}}</p>
+                    <p class="mb-3 text-xl text-start text-gray-700 dark:text-gray-400 font-semibold">{{item.reviewer_name}}</p>
+                    <!-- <button class="inline-flex items-center px-3 py-2 text-sm font-medium text-center border-primary-color text-primary-color rounded-lg hover:text-white hover:bg-primary-color">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </button> -->
+                    <div class="flex justify-center">
+                        <button (click)="edit(item)" type="button" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button (click)="deleteData(item)" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"><i class="fa-regular fa-trash-can"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+<p-dialog [header]="form['Header']" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }" [draggable]="false" [resizable]="false">
+    <form #formData="ngForm" (ngSubmit)="saveData(formData)" ngNativeValidate>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5 space-y-4">
+            <div class="mb-5">
+                <label for="reviewer_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reviewer Name</label>
+                <input type="text" id="reviewer_name" name="reviewer_name" [(ngModel)]="formaData['reviewer_name']" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+            </div>
+            <div class="mb-5">
+                <label for="reviewer_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reviewer Description</label>
+                <textarea id="reviewer_description" name="reviewer_description" [(ngModel)]="formaData['reviewer_description']" rows="5" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." required></textarea>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+            <button type="button" class="me-3 text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cancel</button>
+            <button type="submit" class="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-lime-300 dark:focus:ring-lime-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{form['button']}}</button>
+        </div>
+    </form>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
